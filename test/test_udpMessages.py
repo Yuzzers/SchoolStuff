@@ -29,4 +29,4 @@ def test_udp_client_server():
 
     # Tjek at vi har modtaget mindst X% af beskederne
     assert received_count >= (sent_count * expected_min_percentage_recieved), \
-        f"Forventede mindst {min_percent}% beskeder, men fik kun {received_count}/{sent_count}"
+        f"Forventede mindst {expected_min_percentage_recieved}% beskeder, men fik kun {received_count}/{sent_count}"
