@@ -12,7 +12,7 @@
             }
         },
         {
-            "label": "pytest run only focus",
+            "label": "pytest focus",
             "detail": "Runs only tests marked with @pytest.mark.focus",
             "type": "shell",
             "command": "cls; pytest -v -s -m focus",
