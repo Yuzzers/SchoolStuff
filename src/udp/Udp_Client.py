@@ -1,12 +1,10 @@
 import socket
 import time
 from datetime import datetime
+from src.colors import Colors
 
 class UDPClient:
-    yellowColor = "\033[103m"
-    resetColor = "\033[0m"
-
-
+    
     def __init__(self, server_ip: str = "127.0.0.1", server_port: int = 9999):
         """Initialiserer klienten med server IP og port"""
         self.server_ip = server_ip
@@ -28,7 +26,7 @@ class UDPClient:
             # Send besked til server
             self.client_socket.sendto(msg_with_time.encode("utf-8"), (self.server_ip, self.server_port))
             
-            print(f"{self.yellowColor}Sent: {msg_with_time}{self.resetColor}")
+            print(f"{Colors.yellowColor}Sent: {msg_with_time}{Colors.resetColor}")
 
             # Vent delay_ms millisekunder
             time.sleep(delay_ms / 1000.0)

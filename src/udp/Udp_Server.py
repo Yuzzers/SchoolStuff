@@ -1,10 +1,9 @@
 import socket
 import threading
+from src.colors import Colors
 
 class UDPServer:
-    greenColor = "\033[102m"
-    redColor = "\033[101"
-    resetColor = "\033[0m"
+    
 
     def __init__(self):
         # Liste til modtagne beskeder
@@ -32,9 +31,9 @@ class UDPServer:
                 data, addr = self.server_socket.recvfrom(1024)  # buffer size = 1024 bytes
                 message = data.decode("utf-8")
                 self.receivedMessages.append(message)
-                print(f"{self.greenColor}Received from {addr}: {message}{self.resetColor}")
+                print(f"{Colors.greenColor}Received from {addr}: {message}{Colors.resetColor}")
             except Exception as e:
-                print(f"{self.redColor}Error receiving message:{self.resetColor}", e)
+                print(f"{Colors.redColor}Error receiving message:{Colors.resetColor}", e)
                 self.is_running = False
         if self.server_socket:
             self.server_socket.close()
