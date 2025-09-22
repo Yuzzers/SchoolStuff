@@ -1,29 +1,23 @@
-# README #
-
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
+This is for teaching different protocols on Zealand Business Academy (zealand.dk)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Prototypes are for:
+* UDP
+* TCP
+* MQTT
+* HTTP
 
 ### How do I get set up? ###
+Installation
+* pip install pytest
+* pip install amqtt
+* pip install asyncio
+* pip install paho-mqtt
+* pip install pytest-timeout
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Run in terminal:
+* pytest -v -s 
 
-### Contribution guidelines ###
+Run in VSCodium:
+* [shift]+[ctrl]+b and select "pytest run all"
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
