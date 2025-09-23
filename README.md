@@ -11,17 +11,17 @@ Prototypes are for:
 # Installation (Before running test)
 
 * `pip install pytest`
-* pip install amqtt
-* pip install asyncio
-* pip install paho-mqtt
-* pip install pytest-timeout
+* `pip install amqtt`
+* `pip install asyncio`
+* `pip install paho-mqtt`
+* `pip install pytest-timeout`
 
 ## Run in terminal:
-* pytest -v -s 
+* `pytest -v -s`
 
 ## Run in VSCodium:
-* **[shift]+[ctrl]+b** and select **"pytest run all"**
-* Use **@pytest.mark.focus** on and select **"pytest focus"** to only run the test case in focus
+* `[shift]+[ctrl]+b` and select `pytest run all`
+* Use `@pytest.mark.focus` on and select `pytest focus` to only run the test case in focus
 
 # Narrative
 The students have to create their own narrative, so it can be more relevant for them. 
@@ -33,12 +33,12 @@ The students have to create their own narrative, so it can be more relevant for 
 | ![company 2 logo](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/company_2.png) | **Why:** : The purpose of our company is to ensure the safe and efficient transport of sensitive goods such as medicine and perishable food. **How:**We are developing IoT devices that monitor temperature, humidity, and location of goods during transportation. These devices send real-time data to a cloud platform where alerts and insights are generated to support proactive decision-making. |
 | ![company 3 logo](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/company_3.png) | **Why:** : Our purpose is to improve the quality of home care by giving healthcare professionals access to real-time patient data. **How:**We are developing IoT devices that can monitor patients’ pulse, blood pressure, and activity levels. The devices securely transmit data to a cloud platform, where caregivers and medical staff can access it through a dashboard. |
 
-## Incidents
+# Incidents
 Each teaching material will come from an incident.
 
 Please write your incidents solutions like this (in your own repo and README.file)
 
-### 3 Examples: Test of UDP protocol (for each company)
+## 3 Examples: Test of UDP protocol (for each company)
 ![company 1 logo](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/company_1.png)
 
 We collect data from 1000 soil sensors that send data every 10 seconds.
