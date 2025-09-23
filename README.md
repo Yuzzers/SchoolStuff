@@ -122,4 +122,4 @@ Payload contains:
   "activity_level": "moderate"
 }
 ```
-UDP ensures lightweight, fast updates, while reliability is handled at the application level (e.g., redundant devices in a container, validation rules).
+UDP ensures lightweight, fast updates, while reliability is handled at the application level (e.g., redundant devices in a container, validation rules). 
