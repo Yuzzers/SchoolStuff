@@ -28,9 +28,9 @@ The students have to create their own narrative, so it can be more relevant for 
 ### Company examples
 | Company&nbsp;Logo | Company why & how |
 | --- | --- |
-| ![company 1 logo](./images/company_1.png) | **Why:** Our goal is to help farmers optimize their crop yields and promote more sustainable farming practices by using data-driven insights . **How:** We are developing IoT-based sensors that measure soil moisture, fertilizer levels, and temperature. These sensors transmit real-time data to a cloud-based platform where farmers can access analytics and recommendations.|
-| ![company 2 logo](./images/company_2.png) | **Why:** : The purpose of our company is to ensure the safe and efficient transport of sensitive goods such as medicine and perishable food. **How:**We are developing IoT devices that monitor temperature, humidity, and location of goods during transportation. These devices send real-time data to a cloud platform where alerts and insights are generated to support proactive decision-making. |
-| ![company 3 logo](./images/company_3.png) | **Why:** : Our purpose is to improve the quality of home care by giving healthcare professionals access to real-time patient data. **How:**We are developing IoT devices that can monitor patients’ pulse, blood pressure, and activity levels. The devices securely transmit data to a cloud platform, where caregivers and medical staff can access it through a dashboard. |
+| ![company 1 logo](images/company_1.png) | **Why:** Our goal is to help farmers optimize their crop yields and promote more sustainable farming practices by using data-driven insights . **How:** We are developing IoT-based sensors that measure soil moisture, fertilizer levels, and temperature. These sensors transmit real-time data to a cloud-based platform where farmers can access analytics and recommendations.|
+| ![company 2 logo](images/company_2.png) | **Why:** : The purpose of our company is to ensure the safe and efficient transport of sensitive goods such as medicine and perishable food. **How:**We are developing IoT devices that monitor temperature, humidity, and location of goods during transportation. These devices send real-time data to a cloud platform where alerts and insights are generated to support proactive decision-making. |
+| ![company 3 logo](images/company_3.png) | **Why:** : Our purpose is to improve the quality of home care by giving healthcare professionals access to real-time patient data. **How:**We are developing IoT devices that can monitor patients’ pulse, blood pressure, and activity levels. The devices securely transmit data to a cloud platform, where caregivers and medical staff can access it through a dashboard. |
 
 ## Incidents
 Each teaching material will come from an incident.
@@ -38,7 +38,7 @@ Each teaching material will come from an incident.
 Please write your incidents solutions like this (in your own repo and README.file)
 
 ### 3 Examples: Test of UDP protocol (for each company)
-![company 1 logo](./images/company_1.png)
+![company 1 logo](images/company_1.png)
 
 We collect data from 1000 soil sensors that send data every 10 seconds.
 Each sensor measures soil moisture, fertilizer levels, and temperature, and transmits data continuously to our cloud platform.
@@ -65,7 +65,7 @@ Each sensor sends a small UDP packet with:
 Packets are transmitted to a UDP server endpoint
 
 ---
-![company 2 logo](./images/company_2.png)
+![company 2 logo](images/company_2.png)
 
 We collect data from 100 sensors that send data every 1 second.
 Each sensor monitors temperature, humidity, and location inside transport containers.
@@ -95,7 +95,7 @@ Payload contains:
 UDP ensures lightweight, fast updates, while reliability is handled at the application level (e.g., redundant devices in a container, validation rules).
 
 ---
-![company 3 logo](./images/company_3.png)
+![company 3 logo](images/company_3.png)
 
 We collect data from 10 wearable medical sensors that send data every 100 milliseconds.
 Each device monitors pulse, blood pressure, and activity levels.
