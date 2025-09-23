@@ -26,7 +26,7 @@ class UDPClient:
             # Send besked til server
             self.client_socket.sendto(msg_with_time.encode("utf-8"), (self.server_ip, self.server_port))
             
-            print(f"{Colors.yellowColor}Sent: {msg_with_time}{Colors.resetColor}")
+            print(f"{Colors.yellow}Sent: {msg_with_time}{Colors.reset}")
 
             # Vent delay_ms millisekunder
             time.sleep(delay_ms / 1000.0)

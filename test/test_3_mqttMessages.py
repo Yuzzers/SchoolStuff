@@ -45,6 +45,7 @@ def client_factory():
     for c in clients:
         c.close()
 
+#@pytest.mark.focus
 def test_pubsub(broker, client_factory):
     # Given
     C1 = client_factory("C1")

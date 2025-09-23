@@ -5,6 +5,7 @@ import pytest
 from src.tcp.Tcp_Server import TCPServer
 from src.tcp.Tcp_Client import TCPClient
 
+#@pytest.mark.focus
 @pytest.mark.timeout(20)
 def test_server_client_message_exchange():
     host, port = "127.0.0.1", 12345
