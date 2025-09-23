@@ -96,6 +96,7 @@ UDP ensures lightweight, fast updates, while reliability is handled at the appli
 
 ---
 ![company 3 logo](images/company_3.png)
+<img src="images/company_3.png" alt="company 3 logo">
 
 We collect data from 10 wearable medical sensors that send data every 100 milliseconds.
 Each device monitors pulse, blood pressure, and activity levels.
