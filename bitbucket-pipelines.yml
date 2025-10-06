@@ -11,6 +11,14 @@ pipelines:
       - step:
           name: 'Build and Test'
           script:
+            - pip install pytest
+            - pip install amqtt
+            - pip install asyncio
+            - pip install paho-mqtt
+            - pip install pytest-timeout
+            - pip install fastapi uvicorn
+            - pip install python-multipart
+            - pip install httpx
             - pytest -v -s
       - step:
           name: 'Lint'
