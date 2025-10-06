@@ -15,6 +15,9 @@ Prototypes are for:
 * `pip install asyncio`
 * `pip install paho-mqtt`
 * `pip install pytest-timeout`
+* `pip install fastapi uvicorn`
+* `pip install python-multipart`
+* `pip install httpx`
 
 ## Run in terminal:
 * `pytest -v -s`
