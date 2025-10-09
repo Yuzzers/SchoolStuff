@@ -4,7 +4,7 @@ from src.http.rest_api_eksempel_3 import app  # <-- ændr evt. hvis din fil ikke
 
 client = TestClient(app)
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_create_person():
     # Test at oprette en person
     response = client.post(
@@ -18,7 +18,7 @@ def test_create_person():
     assert json_data["data"]["navn"] == "Jens"
     assert json_data["data"]["alder"] == 35
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_get_existing_person():
     # Test at hente den samme person (som vi netop oprettede)
     response = client.get("/person/1337")
@@ -29,7 +29,7 @@ def test_get_existing_person():
     assert json_data["data"]["navn"] == "Jens"
     assert json_data["data"]["alder"] == 35
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_get_non_existing_person():
     # Test at hente en person der ikke findes
     response = client.get("/person/1338")
@@ -38,7 +38,7 @@ def test_get_non_existing_person():
     assert json_data["status"] == "fejl"
     assert "findes ikke" in json_data["besked"]
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_get_person_without_id():
     # Test at kalde /person uden id
     response = client.get("/person")
