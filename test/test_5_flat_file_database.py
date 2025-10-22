@@ -31,7 +31,7 @@ def cleanup_files(scope="function", autouse=True):
 # tests
 
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_start_rest_api_with_no_flatfile_CRUD_Delete_Read(cleanup_files):
     # given
     create_json_file("db_flat_file_test.json", {})  # tom database
@@ -46,7 +46,7 @@ def test_start_rest_api_with_no_flatfile_CRUD_Delete_Read(cleanup_files):
     assert response.status_code == 404
     assert "findes ikke" in response.json()["detail"]
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_start_rest_api_with_not_empty_flatfile_CRUD_Read(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
@@ -66,7 +66,7 @@ def test_start_rest_api_with_not_empty_flatfile_CRUD_Read(cleanup_files):
     assert data["body"]["navn"] == "Anders"
     assert data["body"]["alder"] == 42
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_create_person_updates_flat_file_CRUD_Create_Update(cleanup_files):
     #given
     filename = "db_flat_file_test.json"
@@ -87,7 +87,7 @@ def test_create_person_updates_flat_file_CRUD_Create_Update(cleanup_files):
         data = json.load(f)
     assert "1338" in data
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_persistence_between_sessions_CRUD_Create_restart_Read(cleanup_files):
     # given
     filename = "db_flat_file_test.json"

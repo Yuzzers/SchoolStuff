@@ -18,6 +18,14 @@ Prototypes are for:
 * `pip install fastapi uvicorn`
 * `pip install python-multipart`
 * `pip install httpx`
+* `pip install jinja2`
+* `pip install AsyncClient`
+* `pip install pytest-asyncio`
+
+
+or run it as a single install:
+pytest`
+* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio`
 
 ## Run in terminal:
 * `pytest -v -s`
