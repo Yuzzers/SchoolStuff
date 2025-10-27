@@ -21,11 +21,11 @@ Prototypes are for:
 * `pip install jinja2`
 * `pip install AsyncClient`
 * `pip install pytest-asyncio`
+* `pip install Crypto`
 
 
 or run it as a single install:
-pytest`
-* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio`
+* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio Crypto`
 
 ## Run in terminal:
 * `pytest -v -s`
