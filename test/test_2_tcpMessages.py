@@ -20,10 +20,16 @@ def test_server_client_message_exchange():
     client = TCPClient(host=host, port=port)
     client.connect()
 
-    for _ in range(number_of_messages):
+    state = "off"
+    for n in range(number_of_messages):
+        if state == "on":
+            state = "off"
+        else:
+            state = "on"
+
         message = json.dumps({
             "actuator_id": "lamp-001",
-            "command": "on",
+            "command": state,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
         client.send_message(message)
