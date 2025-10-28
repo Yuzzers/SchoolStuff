@@ -1,21 +1,39 @@
 
 __Disclaimer:__ This is for teaching advanced network class on Zealand Business Academy (zealand.dk)
 
-<!-- TOC -->
 # Table of Contents
+<!-- TOC -->
+- [Table of Contents](#table-of-contents)
 - [Roleplay as an CTO](#roleplay-as-an-cto)
     - [Incident](#incident)
-    - [Logo:](#logo)
-    - [Why:](#why)
-    - [How:](#how)
+    - [My solution:](#my-solution)
+      - [Why:](#why)
+      - [How:](#how)
 - [Intro to GIT](#intro-to-git)
+    - [Incident](#incident-1)
+    - [My solution](#my-solution-1)
+      - [](#)
+- [Intro to Automated testing](#intro-to-automated-testing)
+    - [Incident](#incident-2)
+    - [My solution](#my-solution-2)
+- [Test of UDP protocol](#test-of-udp-protocol)
+      - [Incident](#incident-3)
+    - [My solution](#my-solution-3)
       - [Why UDP?](#why-udp)
       - [How UDP is Used](#how-udp-is-used)
-      - [We use UDP because:](#we-use-udp-because)
-      - [How UDP is used](#how-udp-is-used-1)
-      - [We use UDP because:](#we-use-udp-because-1)
-      - [How UDP is used](#how-udp-is-used-2)
-
+      - [screenshot of test result:](#screenshot-of-test-result)
+- [Test of TCP protocol](#test-of-tcp-protocol)
+      - [Incident](#incident-4)
+    - [My solution](#my-solution-4)
+      - [Why TCP?](#why-tcp)
+      - [How TCP is Used](#how-tcp-is-used)
+      - [screenshot of test result:](#screenshot-of-test-result-1)
+- [Test of TCP protocol](#test-of-tcp-protocol-1)
+      - [Incident](#incident-5)
+    - [My solution](#my-solution-5)
+      - [Why TCP?](#why-tcp-1)
+      - [How TCP is Used](#how-tcp-is-used-1)
+      - [screenshot of test result:](#screenshot-of-test-result-2)
 <!-- /TOC -->
 
 ---
