@@ -264,7 +264,6 @@ def test_sha2_256():
 
         _, hash_time, hash_mem = benchmark(sha256_hash, data)
         digest = sha256_hash(data)
-        print(sha256_hash(data))
         cpu += hash_time
         ram += hash_mem
 

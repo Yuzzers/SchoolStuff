@@ -1,11 +1,10 @@
-import time
-import re
-import pytest
+import socket, time, sys, os, json, time, re, pytest
+from datetime import datetime, timezone
 
 from src.tcp.Tcp_Server import TCPServer
 from src.tcp.Tcp_Client import TCPClient
 
-#@pytest.mark.focus
+@pytest.mark.focus
 @pytest.mark.timeout(20)
 def test_server_client_message_exchange():
     host, port = "127.0.0.1", 12345
@@ -22,9 +21,12 @@ def test_server_client_message_exchange():
     client.connect()
 
     for _ in range(number_of_messages):
-        timestamp_us = int(time.time() * 1_000_000)
-        msg = f"hello world {timestamp_us}"
-        client.send_message(msg)
+        message = json.dumps({
+            "actuator_id": "lamp-001",
+            "command": "on",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        })
+        client.send_message(message)
         time.sleep(1)
 
     client.close()

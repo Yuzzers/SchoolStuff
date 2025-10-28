@@ -21,7 +21,6 @@ class TCPServer:
         self.errors =[]
 
     def start(self, expected_receive_interval=1.0, background=True):
-        """Start the TCP server. If background=True, run in a separate thread."""
         if background:
             self._thread = threading.Thread(
                 target=self._run, args=(expected_receive_interval,), daemon=True
@@ -31,20 +30,18 @@ class TCPServer:
             self._run(expected_receive_interval)
 
     def _run(self, expected_receive_interval):
-        """Internal server loop."""
         self.server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_sock.bind((self.host, self.port))
         self.server_sock.listen(1)
 
         print(f"TCP server listening on {self.host}:{self.port}")
-
+        print("---")
         try:
             self.conn, self.addr = self.server_sock.accept()
             print(f"Connected by {self.addr}")
             self.conn.settimeout(expected_receive_interval)
 
             buffer = ""
-            print("---")
             self._running = True
             while self._running:
                 try:
@@ -68,7 +65,6 @@ class TCPServer:
             self.close()
 
     def close(self):
-        """Close the connection and server socket."""
         self._running = False
         if self.conn:
             self.conn.close()
@@ -82,7 +78,6 @@ class TCPServer:
 if __name__ == "__main__":
     server = TCPServer()
     try:
-        # Run in foreground (blocking) when started from terminal
         server.start(expected_receive_interval=1.0, background=False)
     except KeyboardInterrupt:
         print("\nServer interrupted by user.")

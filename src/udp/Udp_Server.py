@@ -6,13 +6,11 @@ class UDPServer:
     
 
     def __init__(self):
-        # Liste til modtagne beskeder
         self.receivedMessages = []
         self.server_socket = None
         self.is_running = False
 
     def startServer(self, ip: str, port: int):
-        """Starter UDP serveren på den angivne IP og port"""
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server_socket.bind((ip, port))
         self.is_running = True
@@ -25,7 +23,6 @@ class UDPServer:
         thread.start()
 
     def listen_for_messages(self):
-        """Intern metode til at lytte efter indkommende beskeder"""
         while self.is_running:
             try:
                 data, addr = self.server_socket.recvfrom(1024)  # buffer size = 1024 bytes

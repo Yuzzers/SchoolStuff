@@ -9,20 +9,17 @@ class TCPClient:
         self.sock = None
 
     def connect(self):
-        """Connect to the TCP server."""
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
         print(f"Connected to server {self.host}:{self.port}")
 
     def send_message(self, message: str):
-        """Send a message to the server (adds newline terminator)."""
         if not self.sock:
             raise ConnectionError("Client is not connected to a server.")
+        print(f"{Colors.yellow}Sent:     {message}{Colors.reset}")
         self.sock.sendall((message + "\n").encode())
-        print(f"{Colors.yellow}Sent message: {message}{Colors.reset}")
 
     def close(self):
-        """Close the client socket."""
         if self.sock:
             self.sock.close()
             self.sock = None
