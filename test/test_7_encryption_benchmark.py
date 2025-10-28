@@ -246,7 +246,7 @@ def test_rsa_4096():
 
 
 # ---------- HASHING ----------
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_sha2_256():
     # given
     data = (testData+"1").encode()  # 1024 bytes
