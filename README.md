@@ -37,5 +37,5 @@ or run it as a single install:
 # Narrative
 The students have to create their own narrative, so it can be more relevant for them. 
 
-Example of README.md that the students have to make: [README_projekt_example_1.md](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/README_projekt_example_1.md)
+Example of README.md that the students have to make: [README_projekt_example_1.md](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/src/main/README_projekt_example_1.md)
 
