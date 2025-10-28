@@ -23,7 +23,6 @@ class MQTTClient:
         self.client.on_disconnect = self._on_disconnect
 
     def connect(self, background=True):
-        """Connect to the MQTT broker."""
         self.client.connect(self.broker_host, self.broker_port, keepalive=60)
 
         if background:
@@ -39,7 +38,6 @@ class MQTTClient:
         print(f"* {self.name} Connected to broker {self.broker_host}:{self.broker_port}")
     
     def wait_until_connected(self, timeout=5):
-        """Block until connected or timeout"""
         start = time.time()
         while not self._connected:
             if time.time() - start > timeout:
@@ -63,18 +61,16 @@ class MQTTClient:
         self.receivedMessages.append((msg.topic, message))
 
     def publish(self, topic, message):
-        """Publish a message to a topic."""
         if not self._connected:
             raise ConnectionError("Client is not connected to a broker.")
-        self.client.publish(topic, message)
         print(f"{self.colorPublish}* {self.name}: Published: {topic} -> {message}{Colors.reset}")
+        self.client.publish(topic, message)
 
     def subscribe(self, topic):
-        """Subscribe to a topic to receive messages."""
         if not self._connected:
             raise ConnectionError("Client is not connected to a broker.")
-        self.client.subscribe(topic)
         print(f"* {self.name}: Subscribed to topic: {topic}")
+        self.client.subscribe(topic)
 
     def close(self):
         """Disconnect cleanly."""

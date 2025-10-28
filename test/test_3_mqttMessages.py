@@ -45,48 +45,61 @@ def client_factory():
     for c in clients:
         c.close()
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_pubsub(broker, client_factory):
     # Given
-    C1 = client_factory("C1")
-    C2 = client_factory("C2")
-    C3 = client_factory("C3")
+    lamp1 = client_factory("Lamp 1 on field 1")
+    lamp2 = client_factory("Lamp 2 on field 2")
+    lamp3 = client_factory("Lamp 3 on field 1")
+    lamp4 = client_factory("Lamp 3 on field 2")
+    laptop_at_central = client_factory("Central")
+    laptop_at_barn = client_factory("Barn")
 
-    C1.subscribe("topic 1")
-    C2.subscribe("topic 2")
-    C3.subscribe("topic 1")
+    lamp1.subscribe("field 1")
+    lamp2.subscribe("field 2")
+    lamp3.subscribe("field 1")
+    laptop_at_central.subscribe("central")
+    laptop_at_barn.subscribe("barn")
 
     time.sleep(1)  # allow subscriptions to register
 
     # When
     numberOfRepeats = 1
     for i in range(numberOfRepeats):
-        C1.publish("topic 2", f"C1M{i}")
-        C2.publish("topic 1", f"C2M2{i}")
-        C3.publish("topic 1", f"C3M3{i}")
+        laptop_at_central.publish("field 2", f"on 2")
+        laptop_at_central.publish("field 1", f"on 1")
+        laptop_at_barn.publish("field 1", f"off 1")
         time.sleep(0.1)  # give broker time to route
 
     # give time for async callbacks to fire
     time.sleep(2)
 
     # Then
-    # C2 must receive 10 messages of C1M...
-    c2_msgs = [m for _, m in C2.receivedMessages if m.startswith("C1M")]
-    assert len(c2_msgs) == numberOfRepeats
+    lamp1_messages = [m for _, m in lamp1.receivedMessages if m.startswith("on 1")]
+    assert len(lamp1_messages) == numberOfRepeats
 
-    # C1 must receive 10 messages of C2M...
-    c1_msgs_from_c2 = [m for _, m in C1.receivedMessages if m.startswith("C2M2")]
-    assert len(c1_msgs_from_c2) == numberOfRepeats
+    lamp1_messages = [m for _, m in lamp1.receivedMessages if m.startswith("on 2")]
+    assert len(lamp1_messages) == 0
 
-    # C1 must receive 10 messages of C3M...
-    c1_msgs_from_c3 = [m for _, m in C1.receivedMessages if m.startswith("C3M3")]
-    assert len(c1_msgs_from_c3) ==numberOfRepeats
+    lamp1_messages = [m for _, m in lamp1.receivedMessages if m.startswith("off 1")]
+    assert len(lamp1_messages) == numberOfRepeats
 
-    # C3 must receive 10 messages of C2M...
-    c3_msgs_from_c2 = [m for _, m in C3.receivedMessages if m.startswith("C2M2")]
-    assert len(c3_msgs_from_c2) == numberOfRepeats
 
-    # C3 must receive 10 messages of C3M...
-    c3_msgs_from_c3 = [m for _, m in C3.receivedMessages if m.startswith("C3M3")]
-    assert len(c3_msgs_from_c3) == numberOfRepeats
+    lamp2_messages = [m for _, m in lamp2.receivedMessages if m.startswith("on 1")]
+    assert len(lamp2_messages) == 0
+
+    lamp2_messages = [m for _, m in lamp2.receivedMessages if m.startswith("on 2")]
+    assert len(lamp2_messages) == numberOfRepeats
+
+    lamp2_messages = [m for _, m in lamp2.receivedMessages if m.startswith("off 1")]
+    assert len(lamp2_messages) == 0
     
+
+    lamp3_messages = [m for _, m in lamp3.receivedMessages if m.startswith("on 1")]
+    assert len(lamp3_messages) == numberOfRepeats
+
+    lamp3_messages = [m for _, m in lamp3.receivedMessages if m.startswith("on 2")]
+    assert len(lamp3_messages) == 0
+
+    lamp3_messages = [m for _, m in lamp3.receivedMessages if m.startswith("off 1")]
+    assert len(lamp3_messages) == numberOfRepeats

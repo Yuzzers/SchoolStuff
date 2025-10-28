@@ -28,7 +28,7 @@ __Disclaimer:__ This is for teaching advanced network class on Zealand Business 
       - [Why TCP?](#why-tcp)
       - [How TCP is Used](#how-tcp-is-used)
       - [screenshot of test result:](#screenshot-of-test-result-1)
-- [Test of TCP protocol](#test-of-tcp-protocol-1)
+- [Test of MQTT protocol](#test-of-mqtt-protocol)
       - [Incident](#incident-5)
     - [My solution](#my-solution-5)
       - [Why TCP?](#why-tcp-1)
@@ -177,38 +177,49 @@ Location: `test/test_2_tcpMessages.py`
 ---
 
 ---
-# Test of TCP protocol
+# Test of MQTT protocol
 #### Incident
-The company needs to control various actuators and devices over a network. 
+The company wants to build a decentralized and scalable IoT network. 
 
-Actuators perform actions based on received data (e.g., lamps, motors, speakers, displays), while devices include controllers such as Arduino, Raspberry Pi, or computers. 
+Sensors, actuators, and devices must be configured to publish and subscribe to relevant topics so they can exchange data efficiently without having to setup direct connections between each. 
 
-Command order and delivery reliability are critical, for example, a lamp must correctly respond to a sequence like `on, off, on, off` without errors or and in correct order.
+For example that all lamps on field 1 and not field 2 can be turned off with a single command.
 
-A TCP setup would be good.
+A MQTT setup would be good.
 
 ### My solution
 #### Why TCP?
 
-We chose TCP (Transmission Control Protocol) because:
-* Reliable delivery ensures all control commands reach the target devices without loss.
-* Ordered transmission guarantees commands are executed in the correct sequence (e.g., on → off → on).
-* Error detection and retransmission make it suitable for critical actuator control where missed or corrupted data could cause faults.
-* Low latency and reduced network overhead compared to MQTT, and HTTP.
+We chose MQTT (Message Queuing Telemetry Transport) because:
+* It uses a publish/subscribe model, enabling scalable and flexible communication between many devices without direct links.
+
+* Topic-based filtering allows targeted control — e.g., sending a single command to all lamps on field 1.
+
+* Quality of Service (QoS) levels ensure reliable message delivery, even on unstable networks.
+
+* Persistent sessions and last will messages improve robustness and fault tolerance in distributed systems.
 
 #### How TCP is Used
-Each sensor sends a small TCP packet with:
+Each sensor sends a small MQTT message with:
 ```
-{
-  "actuator_id": "lamp-001",
-  "command": "on",
-  "timestamp": "2025-09-23T14:52:05Z",
+* Central: Published: field 1 -> on 1
+* Lamp 1 on field 1: Received: field 1 -> on 1
+* Lamp 3 on field 1: Received: field 1 -> on 1
+```
+```
+* Central: Published: field 2 -> on 2
+* Lamp 2 on field 2: Received: field 2 -> on 2
+```
+```
+* Barn: Published: field 1 -> off 1
+* Lamp 1 on field 1: Received: field 1 -> off 1
+* Lamp 3 on field 1: Received: field 1 -> off 1
 }
 ```
 
 #### screenshot of test result:
 Location: `test/test_2_tcpMessages.py`
-![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/5_1.png)
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/6_1.png)
 
 [To table of contents](#table-of-contents)
 
