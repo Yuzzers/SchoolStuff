@@ -31,7 +31,7 @@ class UDPServer:
                 data, addr = self.server_socket.recvfrom(1024)  # buffer size = 1024 bytes
                 message = data.decode("utf-8")
                 self.receivedMessages.append(message)
-                print(f"{Colors.green}Received from {addr}: {message}{Colors.reset}")
+                print(f"{Colors.green}Received: {message}{Colors.reset}")
             except Exception as e:
                 print(f"{Colors.red}Error receiving message:{Colors.reset}", e)
                 self.is_running = False

@@ -4,7 +4,7 @@ from src.udp.Udp_Server import UDPServer
 from src.udp.Udp_Client import UDPClient
 
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_udp_client_server():
     # given
     messages_to_send = 10
@@ -15,7 +15,8 @@ def test_udp_client_server():
     server = UDPServer()
     server.startServer("127.0.0.1", 9999)
     client = UDPClient("127.0.0.1", 9999)
-    client.sendMessage("test besked", repeat=messages_to_send, delay_ms=delay_ms)
+
+    client.sendMessage(repeat=messages_to_send, delay_ms=delay_ms)
 
     time.sleep(1)
     sent_count = messages_to_send
@@ -25,8 +26,8 @@ def test_udp_client_server():
     # then
     received_count = len(server.receivedMessages)
 
-    print(f"\nAntal sendte beskeder: {sent_count}")
-    print(f"Antal modtagne beskeder: {received_count}")
+    print(f"\nNumber of sent messages: {sent_count}")
+    print(f"Number of recieved messages: {received_count}")
 
     # Tjek at vi har modtaget mindst X% af beskederne
     assert received_count >= (sent_count * expected_min_percentage_recieved), \
