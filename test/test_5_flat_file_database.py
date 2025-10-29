@@ -26,16 +26,13 @@ def cleanup_files(scope="function", autouse=True):
     delete_json_files()
     
 
-
-
 # tests
 
-
-#@pytest.mark.focus
-def test_start_rest_api_with_no_flatfile_CRUD_Delete_Read(cleanup_files):
+@pytest.mark.focus
+def test_start_rest_api_with_no_flatfile_and_is_emtpty(cleanup_files):
     # given
-    create_json_file("db_flat_file_test.json", {})  # tom database
-
+    delete_json_files()
+    
     # when
     api = Rest_api("db_flat_file_test.json")
     client = TestClient(api.app)
@@ -46,13 +43,11 @@ def test_start_rest_api_with_no_flatfile_CRUD_Delete_Read(cleanup_files):
     assert response.status_code == 404
     assert "findes ikke" in response.json()["detail"]
 
-#@pytest.mark.focus
-def test_start_rest_api_with_not_empty_flatfile_CRUD_Read(cleanup_files):
+@pytest.mark.focus
+def test_start_rest_api_with_flatfile_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
-    create_json_file(filename, {
-        "1337": {"person_id": "1337", "navn": "Anders", "alder": 42}
-    })
+    create_json_file(filename, {"1337": {"person_id": "1337", "navn": "Anders", "alder": 42}})
 
     # when
     api = Rest_api(filename)
@@ -66,10 +61,12 @@ def test_start_rest_api_with_not_empty_flatfile_CRUD_Read(cleanup_files):
     assert data["body"]["navn"] == "Anders"
     assert data["body"]["alder"] == 42
 
-#@pytest.mark.focus
-def test_create_person_updates_flat_file_CRUD_Create_Update(cleanup_files):
+@pytest.mark.focus
+def test_create_person_updates_flat_file(cleanup_files):
     #given
     filename = "db_flat_file_test.json"
+    create_json_file(filename, {"1337": {"person_id": "1337", "navn": "Anders", "alder": 42}})
+    
     api = Rest_api(filename)
     client = TestClient(api.app)
     api.on_startup()
@@ -77,24 +74,54 @@ def test_create_person_updates_flat_file_CRUD_Create_Update(cleanup_files):
     # when
     response = client.post(
         "/person",
-        data={"person_id": "1338", "navn": "Bente", "alder": 33}
+        data={"person_id": "1337", "navn": "Bente", "alder": 33}
     )
     assert response.status_code == 200
+    data = response.json()
+    assert data["body"]["navn"] == "Bente"
+    assert data["body"]["alder"] == 33
     assert os.path.exists(filename)
 
     # then
     with open(filename, "r", encoding="utf-8") as f:
         data = json.load(f)
-    assert "1338" in data
+    assert "1337" in data
 
-#@pytest.mark.focus
-def test_persistence_between_sessions_CRUD_Create_restart_Read(cleanup_files):
+@pytest.mark.focus
+def test_start_rest_api_with_no_flatfile_and_creates_and_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
+    delete_json_files()
+    
+    # when
+    api = Rest_api(filename)
+    client = TestClient(api.app)
+    api.on_startup()
+    response = client.post(
+        "/person",
+        data={"person_id": "1337", "navn": "Bente", "alder": 33}
+    )
+    response = client.get("/person/1337")
+    
+    # then
+    assert response.status_code == 200
+    data = response.json()
+    assert data["body"]["navn"] == "Bente"
+    assert data["body"]["alder"] == 33
+
+
+@pytest.mark.focus
+def test_persistence_between_sessions_create_restart_read(cleanup_files):
+    # given
+    filename = "db_flat_file_test.json"
+    create_json_file(filename, {})
+
     api1 = Rest_api(filename)
     client1 = TestClient(api1.app)
     api1.on_startup()
     client1.post("/person", data={"person_id": "1339", "navn": "Carl", "alder": 29})
+    response = client1.get("/person/1339")
+    assert response.status_code == 200
 
     # when
     api2 = Rest_api(filename)

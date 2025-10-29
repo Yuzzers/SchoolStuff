@@ -10,12 +10,30 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
+        }, {
             "label": "pytest focus",
             "detail": "Runs only tests marked with @pytest.mark.focus",
             "type": "shell",
             "command": "cls; pytest -v -s -m focus",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }, {
+            "label": "pytest run all (mac & linux)",
+            "type": "shell",
+            "command": "source venv/bin/activate && clear && pytest -v -s",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }, {
+            "label": "pytest focus (mac & linux)",
+            "detail": "Runs only tests marked with @pytest.mark.focus",
+            "type": "shell",
+            "command": "source .venv/bin/activate && clear && pytest -v -s -m focus",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
