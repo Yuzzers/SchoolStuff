@@ -9,31 +9,34 @@ __Disclaimer:__ This is for teaching advanced network class on Zealand Business 
     - [My solution:](#my-solution)
       - [Why:](#why)
       - [How:](#how)
-- [Intro to GIT](#intro-to-git)
+- [Intro to Automated testing](#intro-to-automated-testing)
     - [Incident](#incident-1)
     - [My solution](#my-solution-1)
-      - [](#)
-- [Intro to Automated testing](#intro-to-automated-testing)
-    - [Incident](#incident-2)
-    - [My solution](#my-solution-2)
 - [Test of UDP protocol](#test-of-udp-protocol)
-      - [Incident](#incident-3)
-    - [My solution](#my-solution-3)
+      - [Incident](#incident-2)
+    - [My solution](#my-solution-2)
       - [Why UDP?](#why-udp)
       - [How UDP is Used](#how-udp-is-used)
       - [screenshot of test result:](#screenshot-of-test-result)
 - [Test of TCP protocol](#test-of-tcp-protocol)
-      - [Incident](#incident-4)
-    - [My solution](#my-solution-4)
+      - [Incident](#incident-3)
+    - [My solution](#my-solution-3)
       - [Why TCP?](#why-tcp)
       - [How TCP is Used](#how-tcp-is-used)
       - [screenshot of test result:](#screenshot-of-test-result-1)
 - [Test of MQTT protocol](#test-of-mqtt-protocol)
-      - [Incident](#incident-5)
-    - [My solution](#my-solution-5)
+      - [Incident](#incident-4)
+    - [My solution](#my-solution-4)
       - [Why TCP?](#why-tcp-1)
       - [How TCP is Used](#how-tcp-is-used-1)
       - [screenshot of test result:](#screenshot-of-test-result-2)
+- [Test of MQTT protocol](#test-of-mqtt-protocol-1)
+      - [Incident](#incident-5)
+    - [My solution](#my-solution-5)
+      - [Why TCP?](#why-tcp-2)
+      - [How TCP is Used](#how-tcp-is-used-2)
+      - [screenshot of test result:](#screenshot-of-test-result-3)
+
 <!-- /TOC -->
 
 ---
@@ -58,24 +61,7 @@ We are developing IoT-based sensors that measure soil moisture, fertilizer level
 [To table of contents](#table-of-contents)
 
 ---
-# Intro to GIT
-### Incident
-Project data, documentation, or source code has been lost or corrupted. 
 
-Causes may include:
-* a developer’s computer crash, 
-* last-minute code changes breaking functionality, 
-* or confusion between multiple unsynchronized versions. 
-
-The student must be able to restore the project and implement proper backup and version control practices.
-
-### My solution
-####
-This readme_project_example and repo is the solution to this assignment.
-
-[To table of contents](#table-of-contents)
-
----
 # Intro to Automated testing
 ### Incident
 The company struggles to remember how different systems are supposed to work.
@@ -90,6 +76,7 @@ The student must setup an automated testing in Python, to build prototypes, show
 
 ### My solution
 __My testfile__
+
 ![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/3_1.png)
 
 __My test cases (1 pass, 1 fail, 1 skips, 1 crashes)__
@@ -224,4 +211,50 @@ Location: `test/test_2_tcpMessages.py`
 [To table of contents](#table-of-contents)
 
 ---
+# Test of MQTT protocol
+#### Incident
+The company wants to build a decentralized and scalable IoT network. 
 
+Sensors, actuators, and devices must be configured to publish and subscribe to relevant topics so they can exchange data efficiently without having to setup direct connections between each. 
+
+For example that all lamps on field 1 and not field 2 can be turned off with a single command.
+
+A MQTT setup would be good.
+
+### My solution
+#### Why TCP?
+
+We chose MQTT (Message Queuing Telemetry Transport) because:
+* It uses a publish/subscribe model, enabling scalable and flexible communication between many devices without direct links.
+
+* Topic-based filtering allows targeted control — e.g., sending a single command to all lamps on field 1.
+
+* Quality of Service (QoS) levels ensure reliable message delivery, even on unstable networks.
+
+* Persistent sessions and last will messages improve robustness and fault tolerance in distributed systems.
+
+#### How TCP is Used
+Each sensor sends a small MQTT message with:
+```
+* UI at Central: Published: field 2 -> on 2
+* Lamp 2 on field 2: Received: field 2 -> on 2
+```
+```
+* UI at Central: Published: field 1 -> on 1
+* Lamp 1 on field 1: Received: field 1 -> on 1
+* Lamp 3 on field 1: Received: field 1 -> on 1
+```
+```
+* UI at Barn: Published: field 1 -> off 1
+* Lamp 3 on field 1: Received: field 1 -> off 1
+* Lamp 1 on field 1: Received: field 1 -> off 1
+}
+```
+
+#### screenshot of test result:
+Location: `test/test_2_tcpMessages.py`
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/6_1.png)
+
+[To table of contents](#table-of-contents)
+
+---
