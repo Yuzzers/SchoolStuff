@@ -23,33 +23,6 @@ We are developing IoT-based sensors that measure soil moisture, fertilizer level
 [To table of contents](#table-of-contents)
 
 ---
-
-# Intro to Automated testing
-### Incident
-The company struggles to remember how different systems are supposed to work.
-
-They want to implement live documentation based on automated test cases, ensuring:
-* codes works as specified
-* documentation:
-  *  stays up to date, 
-  *  serves as a reference for past implementations
-
-The student must setup an automated testing in Python, to build prototypes, show that they work, and how they are supposed to be used.
-
-### My solution
-__My testfile__
-
-![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/3_1.png)
-
-__My test cases (1 pass, 1 fail, 1 skips, 1 crashes)__
-![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/3_2.png)
-
-__The test result__
-![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/3_3.png)
-
-[To table of contents](#table-of-contents)
-
----
 # Test of UDP protocol
 #### Incident
 The company must collect data from one or more sensor setups:
