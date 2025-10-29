@@ -205,4 +205,10 @@ __Reading a person:__
 ![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_3.png)
 
 
+We have also added unit-tests:
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_4.png)
+
+1st and 2nd test gives HTTP Status code 200 (ok)
+3rd test gives HTTP status code 404 (not found)
+4th test gives HTTP status code 400 (bad requestm because we need person_id)
 ---
