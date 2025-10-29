@@ -110,7 +110,7 @@ For example that all lamps on field 1 and not field 2 can be turned off with a s
 A MQTT setup would be good.
 
 ### My solution
-#### Why TCP?
+#### Why MQTT?
 
 We chose MQTT (Message Queuing Telemetry Transport) because:
 * It uses a publish/subscribe model, enabling scalable and flexible communication between many devices without direct links.
@@ -121,7 +121,7 @@ We chose MQTT (Message Queuing Telemetry Transport) because:
 
 * Persistent sessions and last will messages improve robustness and fault tolerance in distributed systems.
 
-#### How TCP is Used
+#### How MQTT is Used
 Each sensor sends a small MQTT message with:
 ```
 * UI at Central: Published: field 2 -> on 2
@@ -146,50 +146,26 @@ Location: `test/test_2_tcpMessages.py`
 [To table of contents](#table-of-contents)
 
 ---
-# Test of MQTT protocol
+# Test of Physical connections
 #### Incident
-The company wants to build a decentralized and scalable IoT network. 
-
-Sensors, actuators, and devices must be configured to publish and subscribe to relevant topics so they can exchange data efficiently without having to setup direct connections between each. 
-
-For example that all lamps on field 1 and not field 2 can be turned off with a single command.
-
-A MQTT setup would be good.
+When setting up and operating a system consisting of x sensors, y actuators, and 1 controller, the following challenges may be experienced (choose yourself):
+* Data loss due to unstable communication (too great a distance)
+* Data loss due to overload (excessive data volume)
+* Data loss due to interference from other networks, high-voltage equipment, or powerful motors.
+A good idea would be to look into the setup of the network and design a good one.
 
 ### My solution
-#### Why TCP?
+#### Why these connections?
 
-We chose MQTT (Message Queuing Telemetry Transport) because:
-* It uses a publish/subscribe model, enabling scalable and flexible communication between many devices without direct links.
+We choose:
+* __Field 1__ has a 433hz radio controller for our sensors. It is easy and cheap to setup and has a large radius. The sensors don't send much data and the data is not vurnable, so we use UDP. The field 1 controller is connected by  RJ45 cables, because it needs to travel a long distance to the office. 
 
-* Topic-based filtering allows targeted control — e.g., sending a single command to all lamps on field 1.
+* __The barn, field 2 and field 3__ is covered by wifi 2,4Ghz. It has a larger coverage than 5Ghz, which is more important here. We use MQTT. We collect lot of data here, which The wifi routers are connected with a RJ45 cables to the office.
 
-* Quality of Service (QoS) levels ensure reliable message delivery, even on unstable networks.
+* __The office__ uses 5Ghz wifi, because we need to transfer a lot of data and we also need the security of wifi, since we also use it for business data. Most runs on HTTP, but also on MQTT. The office is also connected to the internet with a fiber cable.
 
-* Persistent sessions and last will messages improve robustness and fault tolerance in distributed systems.
+__drawing__
 
-#### How TCP is Used
-Each sensor sends a small MQTT message with:
-```
-* UI at Central: Published: field 2 -> on 2
-* Lamp 2 on field 2: Received: field 2 -> on 2
-```
-```
-* UI at Central: Published: field 1 -> on 1
-* Lamp 1 on field 1: Received: field 1 -> on 1
-* Lamp 3 on field 1: Received: field 1 -> on 1
-```
-```
-* UI at Barn: Published: field 1 -> off 1
-* Lamp 3 on field 1: Received: field 1 -> off 1
-* Lamp 1 on field 1: Received: field 1 -> off 1
-}
-```
-
-#### screenshot of test result:
-Location: `test/test_2_tcpMessages.py`
-![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/6_1.png)
-
-[To table of contents](#table-of-contents)
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/7_1.png)
 
 ---
