@@ -206,9 +206,68 @@ __Reading a person:__
 
 
 We have also added unit-tests:
+
 ![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_4.png)
 
 1st and 2nd test gives HTTP Status code 200 (ok)
 3rd test gives HTTP status code 404 (not found)
 4th test gives HTTP status code 400 (bad requestm because we need person_id)
+
+---
+
+# Test of data technologies
+#### Incident
+The company experiences that sensor and measurement data from IoT devices are only stored temporarily in the server’s memory.
+
+When the system restarts or crashes, all data are lost, meaning the system must maintain 100% uptime to avoid data loss.
+
+However, even highly critical systems typically achieve only 99.999% uptime.
+
+A good idea would be to implement one of these:
+* A flat file for fast buffering/logging during failures.
+* A SQL database for structured and persistent storage of measurement data.
+* A NoSQL storage for fast collection of unstructured IoT data and real-time analysis.
+
+
+### My solution
+#### Why
+We have selected to implement a flat_file_db that contains json data.
+
+It is very easy to implement and maintain.
+
+Of course we don't get all the features a known DB could give us.
+
+Currently we don't need much and is okay for small scale projects.
+
+It is also easy to backup and move to other installations.
+
+
+
+#### How
+Data from our flat_file:
+```
+{
+  "1337": {
+    "person_id": "1337",
+    "name": "Jens",
+    "age": 22
+  },
+  "2337": {
+    "person_id": "2337",
+    "name": "Peter",
+    "age": 95
+  }
+}
+```
+
+We have implemented the following tests:
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/9_1.png)
+
+* 1st test verifies if the application can start without the flat_file_db.json (it gives a warning, which is good)
+* 2nd test verifies if the application can start with a flat_file.db json and read a person.
+* 3rd test verifies if the application can update a person
+* 4th test verifies if the application can start without the flat_file and create a person and read it.
+* 5th test verifies if the application keeps the data after a restart.
+
 ---
