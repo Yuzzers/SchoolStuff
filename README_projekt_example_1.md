@@ -169,3 +169,40 @@ __drawing__
 ![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/7_1.png)
 
 ---
+
+# Test of HTTP protocol (RestAPI)
+#### Incident
+The company wants to enable devices and systems to communicate and exchange data easily with external applications, dashboards, or cloud services.
+
+It must also be easy to integrate with web and mobile applications using common web standards and tools. 
+
+HTTP REST API communication can handle these needs effectively, as it:
+* Uses standard web ports (80/443) and is firewall-friendly.
+* Is simple to test, debug, and integrate with existing web services.
+
+
+
+### My solution
+#### Why RestApi?
+It makes it easy to collect all data.
+It also makes it easy to share over the web.
+It also makes it easy to integrate it in different web applications.
+We can also add user authentication to manage, who can read and write data (later on). First we need a user system.
+
+#### How the RestApi is used
+We have used FastApi in Python to implement it, because it automatically creates interactive documentation.
+
+__The overview:__
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_1.png)
+
+__Creating a person:__
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_2.png)
+
+__Reading a person:__
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/8_3.png)
+
+
+---
