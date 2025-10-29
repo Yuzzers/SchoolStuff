@@ -202,18 +202,18 @@ We chose MQTT (Message Queuing Telemetry Transport) because:
 #### How TCP is Used
 Each sensor sends a small MQTT message with:
 ```
-* Central: Published: field 1 -> on 1
+* UI at Central: Published: field 2 -> on 2
+* Lamp 2 on field 2: Received: field 2 -> on 2
+```
+```
+* UI at Central: Published: field 1 -> on 1
 * Lamp 1 on field 1: Received: field 1 -> on 1
 * Lamp 3 on field 1: Received: field 1 -> on 1
 ```
 ```
-* Central: Published: field 2 -> on 2
-* Lamp 2 on field 2: Received: field 2 -> on 2
-```
-```
-* Barn: Published: field 1 -> off 1
-* Lamp 1 on field 1: Received: field 1 -> off 1
+* UI at Barn: Published: field 1 -> off 1
 * Lamp 3 on field 1: Received: field 1 -> off 1
+* Lamp 1 on field 1: Received: field 1 -> off 1
 }
 ```
 
@@ -224,3 +224,4 @@ Location: `test/test_2_tcpMessages.py`
 [To table of contents](#table-of-contents)
 
 ---
+
