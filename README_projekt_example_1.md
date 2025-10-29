@@ -1,44 +1,6 @@
 
 __Disclaimer:__ This is for teaching advanced network class on Zealand Business Academy (zealand.dk)
 
-# Table of Contents
-<!-- TOC -->
-- [Table of Contents](#table-of-contents)
-- [Roleplay as an CTO](#roleplay-as-an-cto)
-    - [Incident](#incident)
-    - [My solution:](#my-solution)
-      - [Why:](#why)
-      - [How:](#how)
-- [Intro to Automated testing](#intro-to-automated-testing)
-    - [Incident](#incident-1)
-    - [My solution](#my-solution-1)
-- [Test of UDP protocol](#test-of-udp-protocol)
-      - [Incident](#incident-2)
-    - [My solution](#my-solution-2)
-      - [Why UDP?](#why-udp)
-      - [How UDP is Used](#how-udp-is-used)
-      - [screenshot of test result:](#screenshot-of-test-result)
-- [Test of TCP protocol](#test-of-tcp-protocol)
-      - [Incident](#incident-3)
-    - [My solution](#my-solution-3)
-      - [Why TCP?](#why-tcp)
-      - [How TCP is Used](#how-tcp-is-used)
-      - [screenshot of test result:](#screenshot-of-test-result-1)
-- [Test of MQTT protocol](#test-of-mqtt-protocol)
-      - [Incident](#incident-4)
-    - [My solution](#my-solution-4)
-      - [Why TCP?](#why-tcp-1)
-      - [How TCP is Used](#how-tcp-is-used-1)
-      - [screenshot of test result:](#screenshot-of-test-result-2)
-- [Test of MQTT protocol](#test-of-mqtt-protocol-1)
-      - [Incident](#incident-5)
-    - [My solution](#my-solution-5)
-      - [Why TCP?](#why-tcp-2)
-      - [How TCP is Used](#how-tcp-is-used-2)
-      - [screenshot of test result:](#screenshot-of-test-result-3)
-
-<!-- /TOC -->
-
 ---
 # Roleplay as an CTO
 ### Incident
