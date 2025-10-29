@@ -231,6 +231,8 @@ A good idea would be to implement one of these:
 
 ### My solution
 #### Why
+Then the data can survive a restart of the server.
+
 We have selected to implement a flat_file_db that contains json data.
 
 It is very easy to implement and maintain.
@@ -241,6 +243,7 @@ Currently we don't need much and is okay for small scale projects.
 
 It is also easy to backup and move to other installations.
 
+We have also made it OOP (Objevt Oriented Programming), beause it is then easier to understand what is the RestApi and what is the data_technology that writes and reads the flatfile.
 
 
 #### How
