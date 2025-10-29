@@ -1,7 +1,7 @@
-import asyncio
-import threading
+import asyncio, threading, time
 from amqtt.broker import Broker
 from amqtt.plugins.base import BasePlugin
+from src.colors import Colors
 
 
 class MQTTBroker:
@@ -12,7 +12,7 @@ class MQTTBroker:
         self._broker = None
         self._loop = None
         self._thread = None
-        self._running = False
+        self.running = False
 
     def _make_config(self):
         return {
@@ -34,7 +34,6 @@ class MQTTBroker:
         def run():
             self._loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self._loop)
-            self._running = True
             try:
                 self._loop.run_until_complete(self._start_broker())
                 self._loop.run_forever()
@@ -42,18 +41,31 @@ class MQTTBroker:
                 print(f"Broker error: {e}")
             finally:
                 self._loop.run_until_complete(self._broker.shutdown())
-
+        
+        self.running = True
         if background:
             self._thread = threading.Thread(target=run, daemon=True)
             self._thread.start()
         else:
             run()
+        
+    def wait_until_running(self):
+        print(f"\n{Colors.yellow}* waiting for broker{Colors.reset}")
+        start = time.time()
+        while True:
+            if self.running:
+                break
+            if time.time() - start >= 5:
+                raise TimeoutError(f"Condition {name} not met within {timeout} seconds")
+            time.sleep(interval)
+        print(f"{Colors.green}* broker is ready {Colors.reset}")
+        
 
     def close(self):
         """Stop the broker."""
-        if not self._running:
+        if not self.running:
             return
-        self._running = False
+        self.running = False
         if self._loop and self._broker:
             asyncio.run_coroutine_threadsafe(self._broker.shutdown(), self._loop)
             self._loop.call_soon_threadsafe(self._loop.stop)
