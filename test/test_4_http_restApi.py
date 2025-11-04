@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from src.http.rest_api_eksempel_3 import app  # <-- ændr evt. hvis din fil ikke hedder main.py
+from src.http.rest_api_eksempel_3 import app
 
 client = TestClient(app)
 

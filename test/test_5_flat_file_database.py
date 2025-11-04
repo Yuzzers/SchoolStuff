@@ -17,8 +17,8 @@ def delete_json_files():
         os.remove(filename)
 
 # setup / cleanup step for each test
-@pytest.fixture
-def cleanup_files(scope="function", autouse=True):
+@pytest.fixture(scope="function", autouse=True)
+def cleanup_files():
     # before test
     delete_json_files()
     yield
@@ -28,10 +28,10 @@ def cleanup_files(scope="function", autouse=True):
 
 # tests
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_start_rest_api_with_no_flatfile_and_is_emtpty(cleanup_files):
     # given
-    delete_json_files()
+    # pass
     
     # when
     api = Rest_api("db_flat_file_test.json")
@@ -43,7 +43,7 @@ def test_start_rest_api_with_no_flatfile_and_is_emtpty(cleanup_files):
     assert response.status_code == 404
     assert "findes ikke" in response.json()["detail"]
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_start_rest_api_with_flatfile_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
@@ -61,7 +61,7 @@ def test_start_rest_api_with_flatfile_reads(cleanup_files):
     assert data["body"]["navn"] == "Anders"
     assert data["body"]["alder"] == 42
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_create_person_updates_flat_file(cleanup_files):
     #given
     filename = "db_flat_file_test.json"
@@ -87,7 +87,7 @@ def test_create_person_updates_flat_file(cleanup_files):
         data = json.load(f)
     assert "1337" in data
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_start_rest_api_with_no_flatfile_and_creates_and_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
@@ -110,7 +110,7 @@ def test_start_rest_api_with_no_flatfile_and_creates_and_reads(cleanup_files):
     assert data["body"]["alder"] == 33
 
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_persistence_between_sessions_create_restart_read(cleanup_files):
     # given
     filename = "db_flat_file_test.json"

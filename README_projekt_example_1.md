@@ -211,7 +211,7 @@ We have also added unit-tests:
 
 1st and 2nd test gives HTTP Status code 200 (ok)
 3rd test gives HTTP status code 404 (not found)
-4th test gives HTTP status code 400 (bad requestm because we need person_id)
+4th test gives HTTP status code 400 (bad request because we need person_id)
 
 ---
 
@@ -272,5 +272,40 @@ We have implemented the following tests:
 * 3rd test verifies if the application can update a person
 * 4th test verifies if the application can start without the flat_file and create a person and read it.
 * 5th test verifies if the application keeps the data after a restart.
+
+---
+
+# Test of Frontend
+#### Incident
+The company experienced challenges because users could only access the system’s functionality through API calls and terminal-based tools.
+
+This made it difficult for non-technical staff to monitor and interact with data or perform daily tasks.
+
+The lack of a visual interface led to errors, inefficiency, and a need for technical assistance even for simple operations.
+
+A good idea would be to develop a web-based HTML frontend that provides an intuitive graphical interface for users.The frontend should allow:
+* Real-time display of data and status information.
+* Creation and management of data directly via the web interface.
+
+
+
+### My solution
+#### Why
+We have used FastApi in Python to create it and by using HTML templates.
+
+
+
+We have build the frontend that takes data from the backend and makes a presentation in the users browser.
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/10_1.png)
+
+We need to start both the backend and the frontend.
+
+![screenshot](https://bitbucket.org/BartlomiejRohardWarszawski/client_server_protocols/raw/main/images/10_2.png)
+
+
+
+#### How
+
 
 ---

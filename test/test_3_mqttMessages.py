@@ -6,7 +6,7 @@ from src.mqtt.Mqtt_Broker import MQTTBroker
 from src.mqtt.Mqtt_Client import MQTTClient
 
 
-@pytest.mark.focus
+#@pytest.mark.focus
 def test_pubsub():
     # Given broker is started
     broker = MQTTBroker(host="127.0.0.1", port=1883)
