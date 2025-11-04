@@ -22,10 +22,14 @@ Prototypes are for:
 * `pip install AsyncClient`
 * `pip install pytest-asyncio`
 * `pip install Crypto`
+* `pip install python-jose`
+* `pip install python-dotenv`
+* `pip install cryptography`
+* `pip install pyjwt`
 
 
 or run it as a single install:
-* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio Crypto`
+* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio Crypto python-jose python-dotenv cryptography pyjwt`
 
 ## Run in terminal:
 * `pytest -v -s`
