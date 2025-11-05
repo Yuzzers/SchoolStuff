@@ -21,7 +21,13 @@ class Auth_rest_api:
         self.app.post("/activate_user")(self.activate_user)
 
     def register_user(self, post_variables: RegisterUserRequest):
-        self.user_service.register_user(post_variables.username, post_variables.password, post_variables.first_name, post_variables.last_name, post_variables.roles)
+        self.user_service.register_user(
+            post_variables.username, 
+            post_variables.password, 
+            post_variables.first_name, 
+            post_variables.last_name, 
+            post_variables.roles
+        )
         return { "status": "user created"}
 
     def get_bearer_token(self, post_variables: GetBearerTokenRequest):

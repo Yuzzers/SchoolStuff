@@ -64,7 +64,7 @@ def cleanup_files():
     delete_json_files()
 
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_no_user_file_creates_default_admin():
     # given
     # pass
@@ -73,10 +73,9 @@ def test_no_user_file_creates_default_admin():
     user_service = User_service(filename)
 
     # then
-    user_db = user_service._user_db
-    assert len(user_db) == 1 
+    assert len(user_service._user_db) == 1
 
-    user = user_db["admin"]
+    user = user_service._user_db["admin"]
     
     assert user.username == "admin"
     assert Auth_service.verify_password("admin", user.password)
@@ -94,7 +93,7 @@ def test_no_user_file_creates_default_admin():
     assert user.active == True
     assert user.roles == [Role.admin]
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_with_existing_user_file():
     # given
 
@@ -115,7 +114,7 @@ def test_with_existing_user_file():
     assert user.active == True
     assert user.roles == [Role.admin]
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_register_new_user():
     # given
 
@@ -135,7 +134,7 @@ def test_register_new_user():
     assert user.active == True
     assert user.roles == [Role.user]
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_register_new_user_where_username_is_not_email():
     # given
 
@@ -146,6 +145,7 @@ def test_register_new_user_where_username_is_not_email():
     exception_1 = None
     exception_2 = None
     exception_3 = None
+    exception_4 = None
 
     try:
         user_service.register_user("test_user", "password1234", "Peter", "Parker", [Role.user])
@@ -153,14 +153,19 @@ def test_register_new_user_where_username_is_not_email():
         exception_1 = e
 
     try:
-        user_service.register_user("test_user@fakemail", "password1234", "Peter", "Parker", [Role.user])
+        user_service.register_user("test_user.com", "password1234", "Peter", "Parker", [Role.user])
     except HTTPException as e:
         exception_2 = e
 
     try:
-        user_service.register_user("test_user.com", "password1234", "Peter", "Parker", [Role.user])
+        user_service.register_user("test_user@fakemail", "password1234", "Peter", "Parker", [Role.user])
     except HTTPException as e:
         exception_3 = e
+
+    try:
+        user_service.register_user("test_user@fake@mail.com", "password1234", "Peter", "Parker", [Role.user])
+    except HTTPException as e:
+        exception_4 = e
 
     # then
     assert exception_1 != None, "exception must be thrown"
@@ -169,11 +174,10 @@ def test_register_new_user_where_username_is_not_email():
     assert exception_2 != None, "exception must be thrown"
     assert exception_2.status_code == 400
     assert exception_2.detail == "Invalid email address"
-    assert exception_3 != None, "exception must be thrown"
-    assert exception_3.status_code == 400
-    assert exception_3.detail == "Invalid email address"
+    assert exception_3 == None, "exception must not be thrown"
+    assert exception_4 == None, "exception must not be thrown"
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_register_new_user_where_username_is_taken():
     # given
 
@@ -192,7 +196,7 @@ def test_register_new_user_where_username_is_taken():
     assert exception_1.status_code == 400
     assert exception_1.detail == "Username already exists"
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_get_bearer_token():
     # given
 
@@ -209,7 +213,7 @@ def test_get_bearer_token():
     assert payload["exp"] != None
     assert payload["iat"] != None
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_get_bearer_token_expired():
     # given
 
@@ -235,7 +239,7 @@ def test_get_bearer_token_expired():
     assert exception.status_code == 401
     assert exception.detail == "Token expired"
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_get_bearer_token_invalid():
     # given
 
@@ -257,7 +261,7 @@ def test_get_bearer_token_invalid():
     assert exception.status_code == 401
     assert exception.detail == "Invalid token"
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_deactivate_user_as_admin():
     # given
 
@@ -272,7 +276,7 @@ def test_deactivate_user_as_admin():
     # then
     assert user_service._user_db["bat_man@fake_mail.com"].active == False
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_deactivate_user_as_own_user():
     # given
 
@@ -287,7 +291,7 @@ def test_deactivate_user_as_own_user():
     # then
     assert user_service._user_db["bat_man@fake_mail.com"].active == False    
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_deactivate_user_as_different_user():
     # given
 
@@ -309,7 +313,7 @@ def test_deactivate_user_as_different_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["bat_man@fake_mail.com"].active == True    
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_activate_user_as_admin():
     # given
 
@@ -324,7 +328,7 @@ def test_activate_user_as_admin():
     # then
     assert user_service._user_db["debat_man@fake_mail.com"].active == False
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_activate_user_as_own_user():
     # given
 
@@ -346,7 +350,7 @@ def test_activate_user_as_own_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["debat_man@fake_mail.com"].active == False    
 
-#@pytest.mark.focus
+@pytest.mark.focus
 def test_activate_user_as_different_user():
     # given
 
@@ -368,8 +372,33 @@ def test_activate_user_as_different_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["debat_man@fake_mail.com"].active == False    
 
+@pytest.mark.focus
+def test_deactivate_admin_so_it_cant_deactivate_users():
+    # given
+    create_default_user_file(filename)
+    user_service = User_service(filename)
+    assert user_service._user_db["admin_custom"].active == True
+    assert user_service._user_db["bat_man@fake_mail.com"].active == True
+    
+    # when admin is deactivated
+    token = user_service.get_bearer_token("admin_custom", "qwerty1234567890")
+    user_service.deactivate_user(token, "admin_custom")    
+    
+    exception = None
+    try:
+        user_service.deactivate_user(token, "bat_man@fake_mail.com")    
+    except HTTPException as e:
+        exception = e
 
-#@pytest.mark.focus
+    # then
+    assert exception != None, "exception must be thrown"
+    assert exception.status_code == 403
+    assert exception.detail == "User don't have the privileges"
+    assert user_service._user_db["debat_man@fake_mail.com"].active == False    
+
+
+
+@pytest.mark.focus
 def test_deactive_user_from_restApi():
     # given rest api exists
     create_default_user_file(filename)

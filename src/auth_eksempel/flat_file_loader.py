@@ -4,8 +4,6 @@ from src.auth_eksempel.models import User
 class Flat_file_loader:
     def __init__(self, database_file_name: str = "db_user_flat_file.json"):
         self.database_file_name = database_file_name
-        
-
 
     def load_memory_database_from_file(self):
         in_meomery_database = {}

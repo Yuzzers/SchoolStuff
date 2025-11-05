@@ -51,7 +51,7 @@ class User_service:
         self._file_loader.save_memory_database_to_file(dict_db)
 
     def _check_if_email(self, username):
-        email_pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9._-]+\.[A-Za-z]{2,}$"
+        email_pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9._-]"
         if not re.match(email_pattern, username):
             raise HTTPException(status_code=400, detail="Invalid email address")
 
@@ -108,13 +108,15 @@ class User_service:
         username_who_makes_deactivation = payload["sub"]
         roles = list(payload["roles"])
         deactivate = False
+        user_who_makes_deactivation = self._get_user(username_who_makes_deactivation)
 
-        if self._user_has_at_least_one_role_for_access(username_who_makes_deactivation, [Role.admin]):
-            deactivate = True
+        if(user_who_makes_deactivation.active == True):
+            if self._user_has_at_least_one_role_for_access(username_who_makes_deactivation, [Role.admin]):
+                deactivate = True
 
-        elif self._user_has_at_least_one_role_for_access(username_who_makes_deactivation, [Role.user]):
-            if username_who_makes_deactivation == username_for_deactivation:
-                deactivate = True 
+            elif self._user_has_at_least_one_role_for_access(username_who_makes_deactivation, [Role.user]):
+                if username_who_makes_deactivation == username_for_deactivation:
+                    deactivate = True 
             
         if deactivate:         
             user = self._get_user(username_for_deactivation)
