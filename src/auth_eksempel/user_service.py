@@ -51,8 +51,9 @@ class User_service:
         self._file_loader.save_memory_database_to_file(dict_db)
 
     def _check_if_email(self, username):
-        email_pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9._-]"
-        if not re.match(email_pattern, username):
+        if "@" in username and len(username)>=3:
+            pass
+        else:
             raise HTTPException(status_code=400, detail="Invalid email address")
 
     def _get_user(self, username: str):
