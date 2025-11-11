@@ -6,8 +6,11 @@
 # Node artifact files
 node_modules/
 dist/
+
+# Flat_files DB's
 db_flat_file.json
 db_user_flat_file.json
+
 
 # Compiled Java class files
 *.class
@@ -17,6 +20,8 @@ db_user_flat_file.json
 
 # Log files
 *.log
+*.ndjson
+*.jsonl
 
 # Package files
 *.jar

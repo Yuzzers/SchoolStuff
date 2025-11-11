@@ -15,10 +15,9 @@ class UDPClient:
                 "sensor_id": "farm-001",
                 "temperature": 21.8,
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-            })          
+            })    
+            print(f"{Colors.yellow}Sent:     {message}{Colors.reset}")      
             self.client_socket.sendto(message.encode("utf-8"), (self.server_ip, self.server_port))
-            
-            print(f"{Colors.yellow}Sent:     {message}{Colors.reset}")
 
             time.sleep(delay_ms / 1000.0)
 

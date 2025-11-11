@@ -78,7 +78,7 @@ class TCPServer:
 if __name__ == "__main__":
     server = TCPServer()
     try:
-        server.start(expected_receive_interval=1.0, background=False)
+        server.start(expected_receive_interval=0.1, background=False)
     except KeyboardInterrupt:
         print("\nServer interrupted by user.")
     finally:
