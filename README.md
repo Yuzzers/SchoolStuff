@@ -9,27 +9,7 @@ Prototypes are for:
 * HTTP
  
 # Installation (Before running test)
-
-* `pip install pytest`
-* `pip install amqtt`
-* `pip install asyncio`
-* `pip install paho-mqtt`
-* `pip install pytest-timeout`
-* `pip install fastapi uvicorn`
-* `pip install python-multipart`
-* `pip install httpx`
-* `pip install jinja2`
-* `pip install AsyncClient`
-* `pip install pytest-asyncio`
-* `pip install Crypto`
-* `pip install python-jose`
-* `pip install python-dotenv`
-* `pip install cryptography`
-* `pip install pyjwt`
-
-
-or run it as a single install:
-* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio Crypto python-jose python-dotenv cryptography pyjwt`
+* `pip install amqtt asyncio paho-mqtt pytest-timeout fastapi uvicorn python-multipart httpx jinja2 AsyncClient pytest-asyncio Crypto python-jose python-dotenv cryptography pyjwt python-json-logger`
 
 ## Run in terminal:
 * `pytest -v -s`
