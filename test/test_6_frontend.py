@@ -2,7 +2,8 @@ import pytest, httpx, json
 import src.http_eksempel_6_frontend.frontend_api as frontend_api
 from src.http_eksempel_6_frontend.frontend_api import FrontendApp
 
-#@pytest.mark.focus
+#pytestmark = pytest.mark.focus
+
 @pytest.mark.asyncio
 async def test_index_page():
     # given
@@ -26,7 +27,7 @@ async def test_index_page():
     assert '<button type="submit">Search</button>' in response.text # to verify the form's submit button exists
 
 
-#@pytest.mark.focus
+
 @pytest.mark.asyncio
 async def test_get_person_no_id():
     # given
@@ -50,7 +51,7 @@ async def test_get_person_no_id():
     assert '<button type="submit">Search</button>' in response.text # to verify the form's submit button exists
 
 
-#@pytest.mark.focus
+
 @pytest.mark.asyncio
 async def test_get_person_found(monkeypatch):
     # given mock
@@ -84,7 +85,7 @@ async def test_get_person_found(monkeypatch):
     assert "<tr><th>Alder</th><td>42</td></tr>" in response.text # to verify the person age is shown
     assert '<a href="/">Back</a>' in response.text # to verify the back buttons exists
     
-#@pytest.mark.focus
+
 @pytest.mark.asyncio
 async def test_get_person_not_found(monkeypatch):
     # given mock

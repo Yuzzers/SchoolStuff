@@ -5,8 +5,8 @@ from src.colors import Colors
 from src.mqtt.Mqtt_Broker import MQTTBroker
 from src.mqtt.Mqtt_Client import MQTTClient
 
+#pytestmark = pytest.mark.focus
 
-#@pytest.mark.focus
 def test_pubsub():
     # Given broker is started
     broker = MQTTBroker(host="127.0.0.1", port=1883)
@@ -37,12 +37,16 @@ def test_pubsub():
     laptop_at_barn.subscribe("barn")
 
     # When
+    print("\n")
     laptop_at_central.publish("field 2", f"on 2")
-    time.sleep(0.1)
+    time.sleep(1)
+    print("\n")
     laptop_at_central.publish("field 1", f"on 1")
-    time.sleep(0.1)
+    time.sleep(1)
+    print("\n")
     laptop_at_barn.publish("field 1", f"off 1")
-    time.sleep(0.1)
+    time.sleep(1)
+    print("\n")
     
 
     # Then

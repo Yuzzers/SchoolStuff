@@ -9,6 +9,8 @@ from src.auth_eksempel.auth_service import Auth_service
 from src.auth_eksempel.models import Role
 from src.auth_eksempel.auth_rest_api import Auth_rest_api
 
+#pytestmark = pytest.mark.focus
+
 filename = "db_test_user_flat_file.json"
 
 def create_default_user_file(filename:str):
@@ -64,7 +66,7 @@ def cleanup_files():
     delete_json_files()
 
 
-@pytest.mark.focus
+
 def test_no_user_file_creates_default_admin():
     # given
     # pass
@@ -93,7 +95,7 @@ def test_no_user_file_creates_default_admin():
     assert user.active == True
     assert user.roles == [Role.admin]
 
-@pytest.mark.focus
+
 def test_with_existing_user_file():
     # given
 
@@ -114,7 +116,7 @@ def test_with_existing_user_file():
     assert user.active == True
     assert user.roles == [Role.admin]
 
-@pytest.mark.focus
+
 def test_register_new_user():
     # given
 
@@ -134,7 +136,7 @@ def test_register_new_user():
     assert user.active == True
     assert user.roles == [Role.user]
 
-@pytest.mark.focus
+
 def test_register_new_user_where_username_is_not_email():
     # given
 
@@ -181,7 +183,7 @@ def test_register_new_user_where_username_is_not_email():
 
 
 
-@pytest.mark.focus
+
 def test_register_new_user_where_username_is_taken():
     # given
 
@@ -200,7 +202,7 @@ def test_register_new_user_where_username_is_taken():
     assert exception_1.status_code == 400
     assert exception_1.detail == "Username already exists"
 
-@pytest.mark.focus
+
 def test_get_bearer_token():
     # given
 
@@ -217,7 +219,7 @@ def test_get_bearer_token():
     assert payload["exp"] != None
     assert payload["iat"] != None
 
-@pytest.mark.focus
+
 def test_get_bearer_token_expired():
     # given
 
@@ -243,7 +245,7 @@ def test_get_bearer_token_expired():
     assert exception.status_code == 401
     assert exception.detail == "Token expired"
 
-@pytest.mark.focus
+
 def test_get_bearer_token_invalid():
     # given
 
@@ -265,7 +267,7 @@ def test_get_bearer_token_invalid():
     assert exception.status_code == 401
     assert exception.detail == "Invalid token"
 
-@pytest.mark.focus
+
 def test_deactivate_user_as_admin():
     # given
 
@@ -280,7 +282,7 @@ def test_deactivate_user_as_admin():
     # then
     assert user_service._user_db["bat_man@fake-mail.com"].active == False
 
-@pytest.mark.focus
+
 def test_deactivate_user_as_own_user():
     # given
 
@@ -295,7 +297,7 @@ def test_deactivate_user_as_own_user():
     # then
     assert user_service._user_db["bat_man@fake-mail.com"].active == False    
 
-@pytest.mark.focus
+
 def test_deactivate_user_as_different_user():
     # given
 
@@ -317,7 +319,7 @@ def test_deactivate_user_as_different_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["bat_man@fake-mail.com"].active == True    
 
-@pytest.mark.focus
+
 def test_activate_user_as_admin():
     # given
 
@@ -332,7 +334,7 @@ def test_activate_user_as_admin():
     # then
     assert user_service._user_db["debat_man@fake-mail.com"].active == False
 
-@pytest.mark.focus
+
 def test_activate_user_as_own_user():
     # given
 
@@ -354,7 +356,7 @@ def test_activate_user_as_own_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["debat_man@fake-mail.com"].active == False    
 
-@pytest.mark.focus
+
 def test_activate_user_as_different_user():
     # given
 
@@ -376,7 +378,7 @@ def test_activate_user_as_different_user():
     assert exception.detail == "User don't have the privileges"
     assert user_service._user_db["debat_man@fake-mail.com"].active == False    
 
-@pytest.mark.focus
+
 def test_deactivate_admin_so_it_cant_deactivate_users():
     # given
     create_default_user_file(filename)
@@ -402,7 +404,7 @@ def test_deactivate_admin_so_it_cant_deactivate_users():
 
 
 
-@pytest.mark.focus
+
 def test_deactive_user_from_restApi():
     # given rest api exists
     create_default_user_file(filename)

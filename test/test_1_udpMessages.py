@@ -3,8 +3,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.udp.Udp_Server import UDPServer
 from src.udp.Udp_Client import UDPClient
 
+#pytestmark = pytest.mark.focus
 
-#@pytest.mark.focus
 def test_udp_client_server():
     # given
     messages_to_send = 10

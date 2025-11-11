@@ -4,6 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 from src.http_eksempel_4.rest_api import Rest_api
 
+#pytestmark = pytest.mark.focus
 
 # helpers
 def create_json_file(filename: str, content: dict):
@@ -28,7 +29,7 @@ def cleanup_files():
 
 # tests
 
-#@pytest.mark.focus
+
 def test_start_rest_api_with_no_flatfile_and_is_emtpty(cleanup_files):
     # given
     # pass
@@ -43,7 +44,7 @@ def test_start_rest_api_with_no_flatfile_and_is_emtpty(cleanup_files):
     assert response.status_code == 404
     assert "findes ikke" in response.json()["detail"]
 
-#@pytest.mark.focus
+
 def test_start_rest_api_with_flatfile_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
@@ -61,7 +62,7 @@ def test_start_rest_api_with_flatfile_reads(cleanup_files):
     assert data["body"]["navn"] == "Anders"
     assert data["body"]["alder"] == 42
 
-#@pytest.mark.focus
+
 def test_create_person_updates_flat_file(cleanup_files):
     #given
     filename = "db_flat_file_test.json"
@@ -87,7 +88,7 @@ def test_create_person_updates_flat_file(cleanup_files):
         data = json.load(f)
     assert "1337" in data
 
-#@pytest.mark.focus
+
 def test_start_rest_api_with_no_flatfile_and_creates_and_reads(cleanup_files):
     # given
     filename = "db_flat_file_test.json"
@@ -110,7 +111,7 @@ def test_start_rest_api_with_no_flatfile_and_creates_and_reads(cleanup_files):
     assert data["body"]["alder"] == 33
 
 
-#@pytest.mark.focus
+
 def test_persistence_between_sessions_create_restart_read(cleanup_files):
     # given
     filename = "db_flat_file_test.json"

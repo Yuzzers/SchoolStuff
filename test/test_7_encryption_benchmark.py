@@ -12,7 +12,7 @@ from Crypto.Util import number
 from Crypto.Util.Padding import pad, unpad
 import hashlib
 
-
+#pytestmark = pytest.mark.focus
 
 # Helper: measure execution time and memory
 def benchmark(func, *args, **kwargs):
@@ -30,7 +30,7 @@ print("length: ", len(testData))
 
 
 # ---------- SYMMETRIC ----------
-#@pytest.mark.focus
+
 def test_aes_128():
     # given
     key = get_random_bytes(16)  # AES-128 bit = 16 byte 
@@ -55,7 +55,7 @@ def test_aes_128():
         print(f"CPU:\t{enc_time:.6f}\tms / \t{dec_time:.6f}\tms")
         print(f"RAM:\t{enc_mem:.2f}\tKB / {dec_mem:.2f}\tKB")
 
-#@pytest.mark.focus
+
 def test_aes_256():
     # given
     key = get_random_bytes(32)  # AES-256 bit = 32 byte
@@ -81,7 +81,7 @@ def test_aes_256():
         print(f"RAM:\t{enc_mem:.2f}\tKB / {dec_mem:.2f}\tKB")
     
 
-#@pytest.mark.focus
+
 def test_blowfish_128():
     # given
     key = get_random_bytes(16)  # Blowfish 128 bit =  16 byte 
@@ -115,7 +115,7 @@ def test_blowfish_128():
         print(f"CPU:\t{enc_time:.6f}\tms / \t{dec_time:.6f}\tms")
         print(f"RAM:\t{enc_mem:.2f}\tKB / {dec_mem:.2f}\tKB")
         
-#@pytest.mark.focus
+
 def test_blowfish_448():
     # given
     key = get_random_bytes(56)  # Blowfish 256 bit =  32 byte 
@@ -152,7 +152,7 @@ def test_blowfish_448():
 
 
 # ---------- ASYMMETRIC ----------
-#@pytest.mark.focus
+
 def test_rsa_2048():
     # given
     key_pair = RSA.generate(2048)
@@ -198,7 +198,7 @@ def test_rsa_2048():
         # Optional check
         assert decrypted == data, "RSA decryption failed!"
 
-#@pytest.mark.focus
+
 def test_rsa_4096():
     # given
     key_pair = RSA.generate(4096)
@@ -246,7 +246,7 @@ def test_rsa_4096():
 
 
 # ---------- HASHING ----------
-#@pytest.mark.focus
+
 def test_sha2_256():
     # given
     data = (testData+"1").encode()  # 1024 bytes
@@ -270,7 +270,7 @@ def test_sha2_256():
     # then (manual)
     print(f"Hash: CPU:{(cpu/iterations):.6f}ms, RAM:{(ram/iterations):.2f}KB")
 
-#@pytest.mark.focus
+
 def test_sha2_512():
     # given
     data = testData.encode()  # 1024 bytes
@@ -294,7 +294,7 @@ def test_sha2_512():
     # then (manual)
     print(f"Hash: CPU:{(cpu/iterations):.6f}ms, RAM:{(ram/iterations):.2f}KB")
 
-#@pytest.mark.focus
+
 def test_sha3_256():
     # given
     data = testData.encode()  # 1024 bytes
@@ -318,7 +318,7 @@ def test_sha3_256():
     # then (manual)
     print(f"Hash: CPU:{(cpu/iterations):.6f}ms, RAM:{(ram/iterations):.2f}KB")
 
-#@pytest.mark.focus
+
 def test_sha3_512():
     # given
     data = testData.encode()  # 1024 bytes
