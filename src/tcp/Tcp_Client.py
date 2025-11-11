@@ -35,6 +35,6 @@ if __name__ == "__main__":
         timestamp_us = int(time.time() * 1_000_000)  # microseconds
         msg = f"hello world {timestamp_us}"
         client.send_message(msg)
-        time.sleep(1)
+        time.sleep(.3)
 
     client.close()

@@ -54,7 +54,7 @@ class TCPServer:
                         print(f"{Colors.green}Received: {msg}{Colors.reset}")
                         self.receivedMessages.append(msg)
                 except socket.timeout:
-                    warningMsg = "Socket timeout: No message received" 
+                    warningMsg = "Socket timeout: No message received (will retry automatically)" 
                     print(f"{Colors.orange}Warning, {warningMsg}{Colors.reset}")
                     self.warnings.append(warningMsg)
 

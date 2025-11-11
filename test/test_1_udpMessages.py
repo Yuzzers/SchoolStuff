@@ -3,18 +3,18 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.udp.Udp_Server import UDPServer
 from src.udp.Udp_Client import UDPClient
 
-#pytestmark = pytest.mark.focus
+pytestmark = pytest.mark.focus
 
 def test_udp_client_server():
     # given
     messages_to_send = 10
-    delay_ms = 1000
+    delay_ms = 100
     expected_min_percentage_recieved = 0.8
 
     # when
     server = UDPServer()
-    server.startServer("127.0.0.1", 9999)
-    client = UDPClient("127.0.0.1", 9999)
+    server.startServer("127.0.0.1", 9998)
+    client = UDPClient("127.0.0.1", 9998)
 
     client.sendMessage(repeat=messages_to_send, delay_ms=delay_ms)
 

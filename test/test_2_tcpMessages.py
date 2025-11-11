@@ -1,15 +1,17 @@
-import socket, time, sys, os, json, time, re, pytest
+import socket, time, sys, os, json, time, re, pytest, random
 from datetime import datetime, timezone
 
 from src.tcp.Tcp_Server import TCPServer
 from src.tcp.Tcp_Client import TCPClient
 
-#pytestmark = pytest.mark.focus
+pytestmark = pytest.mark.focus
 
 @pytest.mark.timeout(20)
 def test_server_client_message_exchange():
     host, port = "127.0.0.1", 12345
-    expected_receive_interval = 1.0
+    sending_interval = .1
+    simulated_lag = 2.5/100 # 10/100 is up to 10% lag, while 0/100 is up to 0% lag  
+    expected_receive_interval = .1
     number_of_messages = 10
 
     server = TCPServer(host=host, port=port)
@@ -34,7 +36,8 @@ def test_server_client_message_exchange():
             "timestamp": datetime.now(timezone.utc).isoformat(),
         })
         client.send_message(message)
-        time.sleep(1)
+        time.sleep(sending_interval*(1+simulated_lag*random.random()))
+        print("--")
 
     client.close()
     server.close()
