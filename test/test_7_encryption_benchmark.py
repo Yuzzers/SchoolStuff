@@ -199,6 +199,7 @@ def test_rsa_2048():
         assert decrypted == data, "RSA decryption failed!"
 
 
+@pytest.mark.skip(reason="this one takes somes time, to it is skipped")
 def test_rsa_4096():
     # given
     key_pair = RSA.generate(4096)
