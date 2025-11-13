@@ -1,6 +1,10 @@
+import os
 from src.http_eksempel_6_frontend.frontend_api import FrontendApp
 
-frontend = FrontendApp()
+
+backend_url = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
+
+frontend = FrontendApp(backend_url=backend_url)
 app = frontend.app
 
 

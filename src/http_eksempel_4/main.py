@@ -1,6 +1,6 @@
 from src.http_eksempel_4.rest_api import Rest_api
 
-api = Rest_api(database_file_name = "db_flat_file.json")
+api = Rest_api(database_file_name = "./src/db_flat_file.json")
 app = api.app
 
 # Kør i terminal/console med: 
