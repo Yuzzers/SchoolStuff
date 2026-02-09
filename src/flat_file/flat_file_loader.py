@@ -1,5 +1,6 @@
 import os, json
-from src.http_eksempel_4.person import Person
+from dataclasses import asdict
+
 
 class Flat_file_loader:
     def __init__(self, database_file_name: str = "db_flat_file.json"):
@@ -8,14 +9,19 @@ class Flat_file_loader:
 
 
     def load_memory_database_from_file(self):
-        in_meomery_database = {}
+        users = []
+    
         try:
            with open(self.database_file_name, "r", encoding="utf-8") as f:
-                in_meomery_database = json.load(f)
+                dict_data = json.load(f)["users"]
+                users = [User(**user_dict) for user_dict in dict_data.get("users", [])]
         except:
             print(f"WARNING: file '{self.database_file_name}' don't exist or is corrupt")
-        return in_meomery_database
+        return users
 
-    def save_memory_database_to_file(self, in_meomery_database):
+    def save_memory_database_to_file(self, users):
+        serializable_db = {
+            "users": [asdict(user) for user in users]
+        }
         with open(self.database_file_name, "w", encoding="utf-8") as f:
-            json.dump(in_meomery_database, f, indent=2, ensure_ascii=False)
+            json.dump(serializable_db, f, indent=2, ensure_ascii=False)
