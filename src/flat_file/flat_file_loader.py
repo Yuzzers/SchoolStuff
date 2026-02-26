@@ -1,5 +1,6 @@
 import os, json
 from dataclasses import asdict
+from src.flat_file.user import User
 
 
 class Flat_file_loader:
@@ -9,15 +10,13 @@ class Flat_file_loader:
 
 
     def load_memory_database_from_file(self):
-        users = []
-    
         try:
-           with open(self.database_file_name, "r", encoding="utf-8") as f:
-                dict_data = json.load(f)["users"]
-                users = [User(**user_dict) for user_dict in dict_data.get("users", [])]
+            with open(self.database_file_name, "r", encoding="utf-8") as f:
+                dict_data = json.load(f)
+                return [User(**u) for u in dict_data.get("users", [])]
         except:
             print(f"WARNING: file '{self.database_file_name}' don't exist or is corrupt")
-        return users
+        return []
 
     def save_memory_database_to_file(self, users):
         serializable_db = {

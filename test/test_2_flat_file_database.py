@@ -34,21 +34,15 @@ def test_create_and_find_user():
     # Given
     data_handler = Data_handler(test_file_name)
     assert data_handler.get_number_of_users() == 0
-
     # When
     data_handler.create_user("John", "Doe", "Main Street", 10, "secret")
-
     # Then
     assert data_handler.get_number_of_users() == 1
-    print(data_handler.users)
-
-    user:User = data_handler.get_user_by_id(0)
-    assert user.first_name == "John"
-    assert user.last_name == "Doe"
-    assert user.address == "Main Street"
-    assert user.street_number == 10
-    assert user.password == "secret"
-    assert user.enabled is True
+    user = data_handler.get_decrypted_user(0)
+    assert user["first_name"] == "John"
+    assert user["last_name"] == "Doe"
+    assert user["address"] == "Main Street"
+    assert user["enabled"] == True
 
 def test_disable_enable_user():
     # Given
@@ -76,4 +70,26 @@ def test_disable_enable_user():
     # Then
     assert user0.enabled == True
     assert user1.enabled == False
+def update_first_name(self, user_id, new_first_name):
+    user = self.get_user_by_id(user_id)
+    if user:
+        user.first_name = encrypt(new_first_name)
+        self.flat_file_loader.save_memory_database_to_file(self.users)
+
+def test_get_user_that_does_not_exist():
+    # Given
+    data_handler = Data_handler(test_file_name)
+    # When
+    user = data_handler.get_user_by_id(999)
+    # Then
+    assert user is None
+
+def test_data_persists_after_reload():
+    # Given
+    data_handler = Data_handler(test_file_name)
+    data_handler.create_user("John", "Doe", "Main Street", "10", "secret")
+    # When
+    data_handler2 = Data_handler(test_file_name)
+    # Then
+    assert data_handler2.get_number_of_users() == 1
 

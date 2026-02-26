@@ -1,5 +1,6 @@
 from src.flat_file.user import User
 from src.flat_file.flat_file_loader import Flat_file_loader
+from src.flat_file.encryption import encrypt, decrypt, hash_password
 
 class Data_handler:
     users = []
@@ -18,11 +19,22 @@ class Data_handler:
                 foundUser = user
                 break
         return foundUser
+    def get_decrypted_user(self, user_id: int):
+        user = self.get_user_by_id(user_id)
+        if not user:
+            return None
+        return {
+        "person_id": user.person_id,
+        "first_name": decrypt(user.first_name),
+        "last_name": decrypt(user.last_name),
+        "address": decrypt(user.address),
+        "street_number": user.street_number,
+        "enabled": user.enabled
+    }
     
     def create_user(self, first_name, last_name, address, street_number, password):
         userId = len(self.users)
-        enabled = True
-        user = User(userId, first_name, last_name, address, street_number, password, enabled)
+        user = User(userId, encrypt(first_name), encrypt(last_name), encrypt(address), street_number, hash_password(password), True)
         self.users.append(user)
         self.flat_file_loader.save_memory_database_to_file(self.users)
 
