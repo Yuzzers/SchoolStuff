@@ -7,8 +7,9 @@ class Environment_loader:
 
     @staticmethod
     def load_environment_data():
-        if os.getenv("APP_ENV") is None: # if this is not set, then load the test data environment file '.env'
-            load_dotenv()
+        if os.getenv("APP_ENV") is None:
+            env_file = ".env.test" if os.getenv("ENVIRONMENT_NAME") != "prod" else ".env.prod"
+            load_dotenv(env_file)
 
         environment_name = os.getenv("ENVIRONMENT_NAME")
         if(environment_name == "test"):
