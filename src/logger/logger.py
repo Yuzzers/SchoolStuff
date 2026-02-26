@@ -1,11 +1,11 @@
 import logging
-from pythonjsonlogger import json
+from pythonjsonlogger.json import JsonFormatter
 from pathlib import Path
 
 LOG_FILE = Path("app_log.ndjson")
     
 handler = logging.FileHandler(LOG_FILE)
-formatter = json.JsonFormatter(
+formatter = JsonFormatter(
     fmt="%(asctime)s %(levelname)s %(name)s %(message)s"
 )
 handler.setFormatter(formatter)

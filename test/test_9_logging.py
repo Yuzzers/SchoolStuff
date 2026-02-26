@@ -1,4 +1,5 @@
 import pytest
+from pythonjsonlogger import jsonlogger
 from src.logger.logger import LOGGER
 
 #pytestmark = pytest.mark.focus
