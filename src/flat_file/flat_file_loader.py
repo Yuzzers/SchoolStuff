@@ -1,4 +1,4 @@
-import os, json
+import json
 from dataclasses import asdict
 from src.flat_file.user import User
 
