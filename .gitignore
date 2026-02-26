@@ -11,6 +11,10 @@ dist/
 db_flat_file.json
 db_user_flat_file.json
 
+#Environment Files
+.env.prod
+.env
+!.env.test
 
 # Compiled Java class files
 *.class
